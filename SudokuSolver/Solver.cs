@@ -23,5 +23,14 @@ namespace SudokuSolver
 
             return true;
         }
+
+        public bool IsValidBoard(int[,] board)
+        {
+            var size = board.GetLength(0);
+            if (size < 4) return false;
+            if (!IsSquareBoard(board)) return false;     
+            
+            return Math.Sqrt(size) == Math.Floor(Math.Sqrt(size));
+        }
     }
 }
