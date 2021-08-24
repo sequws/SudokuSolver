@@ -29,31 +29,12 @@ namespace SudokuSolver
                 {0,1,0,0,0 }
             };
 
-            PrintBoard(boardEasy);
-            PrintBoard(boarBad);
+            BoardHelper.PrintBoard(boardEasy);
+            BoardHelper.PrintBoardBeauty(boardEasy);
+            BoardHelper.PrintBoard(boarBad);
 
             Console.ReadLine();
         }
 
-
-        static void PrintBoard(int[,] board)
-        {
-            if(board.GetLength(0) != board.GetLength(1))
-            {
-                Console.WriteLine("This is not a valid sudoku board!");
-                return;
-            }
-
-            int size = board.GetLength(0);
-            for(int r =0; r< size; r++)
-            {
-                for(int c=0; c< size; c++)
-                {
-                    Console.Write( $"{board[r,c]} ");
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }
     }
 }
