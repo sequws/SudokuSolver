@@ -46,15 +46,17 @@ namespace SudokuSolver
             }
 
             int size = board.GetLength(0);
+            int childSize = (int)Math.Sqrt(size);
+
             for (int r = 0; r < size; r++)
             {
                 for (int c = 0; c < size; c++)
                 {
                     Console.Write($"{board[r, c]} ");
-                    if ((c + 1) % 3 == 0) Console.Write(" ");
+                    if ((c + 1) % childSize == 0) Console.Write(" ");
                 }
                 Console.WriteLine();
-                if ((r + 1) % 3 == 0) Console.WriteLine();
+                if ((r + 1) % childSize == 0) Console.WriteLine();
             }
             Console.WriteLine();
         }
