@@ -10,7 +10,6 @@ namespace SudokuSolver
     {
         public List<int[,]> SolutionList => solutionList;
         List<int[,]> solutionList = new List<int[,]>();
-        bool isSolved = false;
 
         public Solver()  {}
 
@@ -19,43 +18,36 @@ namespace SudokuSolver
             if (!IsValidBoard(board)) return false;
             var size = board.GetLength(0);
 
-            //BoardHelper.PrintBoardBeauty(board);
-            //Console.ReadLine();
-
-            for (int r =0; r < size; r++)
+            for (int r = 0; r < size; r++)
             {
-                for( int c=0; c < size; c++)
+                for (int c = 0; c < size; c++)
                 {
-                    for( int nr = 1; nr <= size; nr++)
+                    if(board[r,c] == 0)
                     {
-                        // only one solution
-                        if (isSolved) return true; 
-
-                        if (board[r, c] == 0)
+                        for (int nr = 1; nr <= size; nr++)
                         {
-                            if(!IsInRow(board,r,nr) 
-                                && !IsInColumn(board,c,nr)
-                                && !IsInChildSquare(board,r,c,nr))
+
+                            if (!IsInRow(board, r, nr)
+                                    && !IsInColumn(board, c, nr)
+                                    && !IsInChildSquare(board, r, c, nr))
                             {
                                 board[r, c] = nr;
-
-                                if (CheckSolution(board))
+                                if (Solve(board))
                                 {
-                                    int[,] solution = board.Clone() as int[,];
-                                    solutionList.Add(solution);
-                                    isSolved = true;
-                                    return true;
+                                    return true; 
                                 }
                                 else
                                 {
-                                    Solve(board.Clone() as int[,]);
+                                    board[r, c] = 0;
                                 }
                             }
-                        }                        
+                        }
+                        return false;
                     }
                 }
-            }                      
-
+            }
+            solutionList.Add(board.Clone() as int[,]); 
+        
             return true;
         }
 
@@ -68,7 +60,6 @@ namespace SudokuSolver
                     if (board[y, x] == 0) return false;
                 }
             }
-
             return true;
         }
 
@@ -108,7 +99,6 @@ namespace SudokuSolver
                     }
                 }
             }
-
             return false;
         }
 
@@ -118,7 +108,6 @@ namespace SudokuSolver
             {
                 return false;
             }
-
             return true;
         }
 
