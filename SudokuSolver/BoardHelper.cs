@@ -8,6 +8,23 @@ namespace SudokuSolver
 {
     public class BoardHelper
     {
+        public static int[,] ConvertToBoard(string boardStr, int size)
+        {
+            if (string.IsNullOrWhiteSpace(boardStr)) return new int[0, 0];
+
+            int[,] board = new int[size, size];
+            var elems = boardStr.Split( new char[0], StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            if (elems.Count != size * size) return new int[0,0];
+                        
+            for (int i = 0; i < elems.Count; i++)
+            {
+                board[i % size, i / size] = int.Parse( elems.ElementAt(i));
+            }
+
+            return board;
+        }
+
         public static bool IsValidBoard(int[,] board)
         {
             if (board.GetLength(0) != board.GetLength(1))
@@ -34,7 +51,6 @@ namespace SudokuSolver
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
         }
 
         public static void PrintBoardBeauty(int[,] board)
@@ -58,7 +74,6 @@ namespace SudokuSolver
                 Console.WriteLine();
                 if ((r + 1) % childSize == 0) Console.WriteLine();
             }
-            Console.WriteLine();
         }
     }
 }

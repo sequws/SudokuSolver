@@ -12,8 +12,13 @@ namespace SudokuSolver
         {
             SolveSudoku(SampleSudoku.board9x9Easy);
             SolveSudoku(SampleSudoku.board9x9Easy_2);
-            SolveSudoku(SampleSudoku.board9x9empty);            
+            SolveSudoku(SampleSudoku.board9x9empty);
             SolveSudoku(SampleSudoku.board9x9bad);
+
+            SolveSudoku(BoardHelper.ConvertToBoard(SampleSudoku.boardInLine16x16, 16));
+
+            //SolveSudoku(BoardHelper.ConvertToBoard( string.Concat(Enumerable.Repeat("0 ",16*16)), 16));
+            //SolveSudoku(BoardHelper.ConvertToBoard( string.Concat(Enumerable.Repeat("0 ",64*64)), 64));
 
             Console.WriteLine("Finish");
             Console.ReadLine();
@@ -23,7 +28,7 @@ namespace SudokuSolver
         {
             Solver solver = new Solver();
 
-            Console.WriteLine("Solving: ");
+            Console.WriteLine("\nSolving: ");
             BoardHelper.PrintBoardBeauty(board);
             solver.Solve(board);
 
