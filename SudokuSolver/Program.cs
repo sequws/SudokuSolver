@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,18 +11,33 @@ namespace SudokuSolver
     {
         static void Main(string[] args)
         {
+            if(args.Length == 0)
+            {
+                SolveSamples();
+            }
+            else
+            {
+                if(File.Exists(args[0]))
+                {
+                    Console.WriteLine("ReadFile");
+                }
+                else
+                {
+                    Console.WriteLine("Wrong path to file");
+                }
+            }
+
+            Console.WriteLine("Finish");
+            Console.ReadLine();
+        }
+
+        private static void SolveSamples()
+        {
             SolveSudoku(SampleSudoku.board9x9Easy);
             SolveSudoku(SampleSudoku.board9x9Easy_2);
             SolveSudoku(SampleSudoku.board9x9empty);
             SolveSudoku(SampleSudoku.board9x9bad);
-
             SolveSudoku(BoardHelper.ConvertToBoard(SampleSudoku.boardInLine16x16, 16));
-
-            //SolveSudoku(BoardHelper.ConvertToBoard( string.Concat(Enumerable.Repeat("0 ",16*16)), 16));
-            //SolveSudoku(BoardHelper.ConvertToBoard( string.Concat(Enumerable.Repeat("0 ",64*64)), 64));
-
-            Console.WriteLine("Finish");
-            Console.ReadLine();
         }
 
         static void SolveSudoku(int[,] board)
