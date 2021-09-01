@@ -19,7 +19,26 @@ namespace SudokuSolver
                         
             for (int i = 0; i < elems.Count; i++)
             {
-                board[i % size, i / size] = int.Parse( elems.ElementAt(i));
+                board[i / size, i % size] = int.Parse( elems.ElementAt(i));
+            }
+
+            return board;
+        }
+
+        public static int[,] ConvertStrToBoard(string boardStr)
+        {
+            if (string.IsNullOrWhiteSpace(boardStr)) return new int[0, 0];
+            var elems = boardStr.Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            int size = (int)Math.Sqrt(elems.Count);
+            if (size < 4) return new int[0, 0];
+
+            if (size != Math.Floor(Math.Sqrt(elems.Count))) return new int[0, 0];
+
+            int[,] board = new int[size, size];
+            for (int i = 0; i < elems.Count; i++)
+            {
+                board[ i / size, i % size] = int.Parse(elems.ElementAt(i));
             }
 
             return board;

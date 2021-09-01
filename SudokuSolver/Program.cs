@@ -13,13 +13,15 @@ namespace SudokuSolver
         {
             if(args.Length == 0)
             {
+                Console.WriteLine("Solving built-in examples...");
                 SolveSamples();
             }
             else
             {
                 if(File.Exists(args[0]))
                 {
-                    Console.WriteLine("ReadFile");
+                    Console.WriteLine("Solving from file...");
+                    SolveSudoku(BoardHelper.ConvertStrToBoard(File.ReadAllText(args[0])));
                 }
                 else
                 {
